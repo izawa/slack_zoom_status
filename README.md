@@ -1,2 +1,2 @@
 # slack_zoom_status
-Indicates the status of the Zoom in Slack channel.
+Indicates the availability of Zoom in Slack channel.
