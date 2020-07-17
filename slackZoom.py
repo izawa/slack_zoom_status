@@ -7,7 +7,7 @@ import json
 class Zoom:
     @classmethod
     def checkZoom(cls):
-        x = [pname.name() for pname in [p for p in psutil.process_iter() if p.status()=="running"] if 'CptHost' in pname.name()]
+        x = [p for p in psutil.process_iter() if(p.status() == "running" and p.name() == 'CptHost')]
         return(True if len(x) > 0 else False)
 
 class Slack:
