@@ -7,7 +7,11 @@ import json
 class Zoom:
     @classmethod
     def checkZoom(cls):
-        x = [p for p in psutil.process_iter() if(p.status() == "running" and p.name() == 'CptHost')]
+        try:
+            x = [i for i in [p.info for p in psutil.process_iter(['name', 'status']) if p.info['status'] == psutil.STATUS_RUNNING] if i['name'] == 'CptHost']
+        except:
+            pass
+
         return(True if len(x) > 0 else False)
 
 class Slack:
@@ -39,7 +43,6 @@ class StateMachine:
         else:
             self.stat = status
             return(True)
-    
 
 myMachine = StateMachine()
 mySlack = Slack()
@@ -54,4 +57,4 @@ while True:
             mySlack.set_status(prev_status["status_emoji"], prev_status["status_text"])
     else:
         pass
-    time.sleep(3)
+    time.sleep(5)
